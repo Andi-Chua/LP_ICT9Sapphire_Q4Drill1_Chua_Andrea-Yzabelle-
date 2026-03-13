@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Electricity Consumption Classifier</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background:#c88e8e;
+    padding:60px;
+}
+
+
+.title{
+    font-size:26px;
+    margin-bottom:40px;
+    border:3px solid #3f0510;
+    padding:20px;
+    width:420px;
+    border-radius:15px;
+    background:#f5dcdc;
+    font-weight:700;
+}
+
+.container{
+    background:#3f0510;
+    width:650px;
+    padding:30px;
+    border-radius:40px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.kwh{
+    color:rgb(206, 85, 85);
+    font-size:30px;
+    font-weight:bold;
+}
+
+input{
+    width:280px;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    font-size:16px;
+}
+
+button{
+    background:#d6c48f;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+button:hover{
+    background:#bfaa6d;
+}
+
+.error{
+    color:rgb(207, 29, 29);
+    font-style:italic;
+    width:150px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="title">
+Electricity Consumption <br>
+Classifier
+</div>
+
+<div class="container">
+
+<div class="kwh">kWh</div>
+
+<input type="number" id="kwhInput" placeholder="Input kilowatt per hour ?">
+
+<button onclick="classifyConsumption()">
+Consumption<br>Classification
+</button>
+
+<div id="errorMsg" class="error"></div>
+
+</div>
+
+<script>
+
+function classifyConsumption(){
+
+let kwh = document.getElementById("kwhInput").value;
+let error = document.getElementById("errorMsg");
+
+error.innerHTML = "";
+
+if(kwh === "" || kwh < 0){
+    error.innerHTML = "Please input a non-negative number.";
+    return;
+}
+
+kwh = Number(kwh);
+
+let category = "";
+let description = "";
+
+if(kwh >= 0 && kwh <= 100){
+    category = "Lifeline Consumer";
+    description = "Discounted electricity rates.";
+}
+else if(kwh <= 200){
+    category = "Low Consumption";
+    description = "Normal residential rate.";
+}
+else if(kwh <= 300){
+    category = "Average Consumption";
+    description = "Typical electricity usage.";
+}
+else if(kwh <= 500){
+    category = "High Consumption";
+    description = "Higher electricity usage.";
+}
+else{
+    category = "Very High Consumption";
+    description = "Heavy electricity users.";
+}
+
+alert(category + " : " + description);
+
+}
+
+</script>
+
+</body>
+</html>
